@@ -69,8 +69,14 @@
     e.target.classList.remove('playing');
   }
   function playSound(e) {
-    const audio = document.querySelector(`audio[data-key=${e.code}]`);
-    const key = document.querySelector(`div[data-key=${e.code}]`)
+    let dataType;
+    if (e.type === 'click') {
+      dataType = e.currentTarget.getAttribute("data-key");
+    } else {
+      dataType = e.code;
+    }
+    const audio = document.querySelector(`audio[data-key=${dataType}]`);
+    const key = document.querySelector(`div[data-key=${dataType}]`)
     if (!audio) return;
 
     key.classList.add("playing");
@@ -79,8 +85,10 @@
   }
 
   window.addEventListener('keydown', (e) => playSound(e))
+
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  keys.forEach(key => key.addEventListener('click', (e) => playSound(e)));
 </script>
 </body>
 </html>
