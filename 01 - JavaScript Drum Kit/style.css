@@ -10,10 +10,17 @@ body,html {
   font-family: sans-serif;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .keys {
   display: flex;
+  flex-wrap: wrap;
   flex: 1;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
