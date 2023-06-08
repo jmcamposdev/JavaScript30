@@ -23,9 +23,11 @@
 
   <style>
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
     body {
       text-align: center;
@@ -43,9 +45,26 @@
     input {
       width: 100px;
     }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
   </style>
 
   <script>
+    // Get all inputs
+    const inputs = document.querySelectorAll('.controls input');
+
+    // Handle change event for each input and update CSS variable
+    function handleChange() {
+      const suffix = this.dataset.sizing ?? ""; // Use nullish coalescing operator to set default value
+      document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix) // Set CSS variable
+    }
+
+    // Listen for change event on each input
+    inputs.forEach(input => input.addEventListener('input', handleChange));
   </script>
 
 </body>
